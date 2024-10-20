@@ -1,0 +1,37 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: receiver
+  labels:
+    component: receiver
+spec:
+  lookupPolicy:
+    local: true
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: knative-coding-challange
+    component: receiver
+  name: receiver
+spec:
+  strategy:
+    dockerStrategy:
+      dockerfilePath: Containerfile
+    type: Docker
+  source:
+    contextDir: receiver
+    git:
+      uri: https://github.com/stefan-bergstein/serverless-test-app.git
+    type: Git
+  output:
+    to:
+      kind: ImageStreamTag
+      name: receiver:latest
+  runPolicy: Serial
+  triggers:
+  - type: ConfigChange
+  successfulBuildsHistoryLimit: 3
+  postCommit: {}
+  resources: {}

@@ -1,0 +1,26 @@
+apiVersion: eventing.knative.dev/v1
+kind: Broker
+metadata:
+  name: default
+  labels:
+    app.kubernetes.io/part-of: test-app  
+spec: {}
+---
+# Knative Eventing Trigger to trigger the receiver-python service
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: receiver-python
+  labels:
+    app.kubernetes.io/part-of: test-app  
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: dev.knative.samples.receiver
+      source: dev.knative.samples/receiversource
+  subscriber:
+    ref:
+      apiVersion: v1
+      kind: Service
+      name: receiver-python
