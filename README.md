@@ -24,3 +24,8 @@ Received event: b' {"message": "20.10.2024, 13:47:32: This is a cloud event."}'
 ```
 
 Then submit the challenge and write in the comment text field what the problem was and propose steps to fix it. If you solve it correctly, you get the points!
+
+
+## Prerequisites
+
+- OpenShift Serverless. See [infra/install.sh](infra/install.sh)
