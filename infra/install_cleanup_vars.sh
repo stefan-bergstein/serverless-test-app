@@ -1,0 +1,2 @@
+INST_KNATIVE=true
+CONF_KNATIVE=true
